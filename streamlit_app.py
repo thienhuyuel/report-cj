@@ -50,7 +50,13 @@ if run:
 
     suffix = Path(pst_file.name).suffix or ".pst"
     with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
-        tmp.write(pst_file.getbuffer())
+        # Stream in 8 MB chunks to avoid holding the whole file in memory twice
+        CHUNK = 8 * 1024 * 1024
+        while True:
+            chunk = pst_file.read(CHUNK)
+            if not chunk:
+                break
+            tmp.write(chunk)
         pst_path = tmp.name
 
     try:

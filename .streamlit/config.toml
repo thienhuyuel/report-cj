@@ -1,10 +1,12 @@
 [server]
-# Allow large PST files (up to 500 MB)
-maxUploadSize = 500
-# Keep websocket alive for long-running PST processing
-maxMessageSize = 500
-# Don't close idle websocket connections (prevents ERR_CONNECTION_CLOSED on cold start)
 headless = true
+# PST files are typically 10–100 MB; 200 MB keeps us within Render free 512 MB RAM
+maxUploadSize = 200
+maxMessageSize = 200
+# Disable WS compression — required to avoid ERR_HTTP2_PROTOCOL_ERROR behind Render's proxy
+enableWebsocketCompression = false
+# Trust the X-Forwarded-* headers from Render's load balancer
+enableCORS = false
 
 [browser]
 gatherUsageStats = false
