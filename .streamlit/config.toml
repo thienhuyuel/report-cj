@@ -1,0 +1,10 @@
+[server]
+# Allow large PST files (up to 500 MB)
+maxUploadSize = 500
+# Keep websocket alive for long-running PST processing
+maxMessageSize = 500
+# Don't close idle websocket connections (prevents ERR_CONNECTION_CLOSED on cold start)
+headless = true
+
+[browser]
+gatherUsageStats = false
