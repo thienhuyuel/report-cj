@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 COPY report_pipeline.py streamlit_app.py .
+COPY .streamlit/ .streamlit/
 
 ENV STREAMLIT_SERVER_PORT=8501 \
     STREAMLIT_SERVER_ADDRESS=0.0.0.0 \

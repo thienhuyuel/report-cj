@@ -7,3 +7,4 @@ services:
     dockerfilePath: ./Dockerfile
     dockerContext: .
     plan: free
+    healthCheckPath: /_stcore/health
