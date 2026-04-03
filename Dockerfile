@@ -18,8 +18,11 @@ COPY .streamlit/ .streamlit/
 
 ENV STREAMLIT_SERVER_PORT=8501 \
     STREAMLIT_SERVER_ADDRESS=0.0.0.0 \
-    STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+    STREAMLIT_BROWSER_GATHER_USAGE_STATS=false \
+    STREAMLIT_SERVER_MAX_UPLOAD_SIZE=200 \
+    STREAMLIT_SERVER_MAX_MESSAGE_SIZE=200
 
 EXPOSE 8501
 
-CMD ["streamlit", "run", "streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0", "--server.headless=true"]
+# Explicit limits match .streamlit/config.toml (PST files are often large).
+CMD ["streamlit", "run", "streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0", "--server.headless=true", "--server.maxUploadSize=200", "--server.maxMessageSize=200"]
