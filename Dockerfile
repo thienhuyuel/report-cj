@@ -3,14 +3,15 @@
 # Python 3.11 + libpff (PST) for libpff-python / pypff
 FROM python:3.11-slim-bookworm
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libpff-dev \
-    && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /app
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libpff-dev \
+    && pip install --no-cache-dir -r requirements.txt \
+    && apt-get purge -y --auto-remove build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY report_pipeline.py streamlit_app.py .
 
