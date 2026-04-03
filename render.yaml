@@ -1,0 +1,9 @@
+# Blueprint Render: đặt "Root Directory" = thư mục chứa Dockerfile (ví dụ `web`)
+# Hoặc tạo Web Service thủ công: Runtime Docker, Dockerfile path ./web/Dockerfile
+services:
+  - type: web
+    name: cj-banner-report
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
